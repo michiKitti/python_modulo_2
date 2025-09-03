@@ -38,12 +38,10 @@ def validar_contrasena():
 
         # 6) Si la lista de errores está vacía, es porque pasó todas las validaciones
         if not errores:
-            print("✅ Contraseña válida. ¡Registrada con éxito!")
             # Salgo del while porque ya terminé
             break
         else:
             # 7) Si hubo errores, los imprimo todos para que el usuario sepa qué corregir
-            print("❌ La contraseña no cumple con los siguientes requisitos:")
             for error in errores:
                 print("-", error)
             # 8) Dejo una línea en blanco para separar visualmente los intentos
