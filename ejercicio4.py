@@ -1,10 +1,3 @@
-"""Juego de Piedra, Papel o Tijeras
-Implementa el clásico juego para jugar contra la computadora.
-•	El usuario elige una opción y la computadora elige una al azar.
-•	El programa determina el ganador basándose en las reglas (piedra vence a tijeras, tijeras a papel, papel a piedra).
-•	Se debe llevar un conteo de las victorias del jugador y de la computadora. El juego termina cuando uno de los dos llegue a 3 victorias.
-Conceptos aplicados: random.choice(), bucle while, if/elif/else, contadores, f-strings.
-"""
 import random
 
 def juego_piedra_papel_tijeras():
@@ -34,6 +27,7 @@ def juego_piedra_papel_tijeras():
 
         # 5) Valido que sea una opción válida
         if jugador not in opciones:
+            print(" Opción no válida. Intenta de nuevo.\n")
             continue  # vuelve al inicio del bucle
 
         # 6) La computadora elige una opción al azar
@@ -42,11 +36,14 @@ def juego_piedra_papel_tijeras():
 
         # 7) Comparo las elecciones y determino el ganador de la ronda
         if jugador == pc:
+            print(" Empate, nadie gana esta ronda.\n")
         elif (jugador == "piedra" and pc == "tijeras") or \
              (jugador == "tijeras" and pc == "papel") or \
              (jugador == "papel" and pc == "piedra"):
+            print("¡Ganaste esta ronda!\n")
             victorias_jugador += 1
         else:
+            print(" La computadora gana esta ronda.\n")
             victorias_pc += 1
 
         # 8) Muestro el marcador actual
@@ -54,7 +51,9 @@ def juego_piedra_papel_tijeras():
 
     # 9) Al salir del bucle, alguien llegó a 3 victorias
     if victorias_jugador == 3:
+        print(" ¡Felicidades, ganaste la partida!")
     else:
+        print(" La computadora ganó la partida. ¡Suerte para la próxima!")
 
 # 10) Llamo a la función para jugar
 juego_piedra_papel_tijeras()
