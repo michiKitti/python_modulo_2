@@ -7,3 +7,7 @@ def test_validar_edad():
     assert validar_edad(20) == 20000
     assert validar_edad(11) == 10000
     assert validar_edad(16) == 15000
+
+def test_validar_estudiante():
+    assert validar_estudiante("si",20000)== 18000
+    assert validar_estudiante("no",20000)== 20000
