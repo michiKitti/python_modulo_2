@@ -1,22 +1,24 @@
-def clasificador_numeros():
-    """
-    Programa que clasifica un número como Par o Impar usando un operador ternario.
-    Además, si el número es múltiplo de 5, muestra un mensaje extra.
-    """
+def validar_clasificador_de_numeros():
 
-    # 1) Pido un número al usuario y lo convierto a entero
-    numero = int(input("Ingresa un número: "))
+        """
+        Clasifica un número como Par o Impar usando un operador ternario.
+        Además, si el número es múltiplo de 5, incluye un mensaje adicional.
+        """
+        # Uso del operador ternario
+        resultado = "Par" if numero % 2 == 0 else "Impar"
 
-    # 2) Uso el operador ternario para decidir si es Par o Impar
-    #    Sintaxis: valor_si_verdadero if condicion else valor_si_falso
-    resultado = "Par" if numero % 2 == 0 else "Impar"
+        # Construyo el mensaje base
+        mensaje = f"El número {numero} es {resultado}."
 
-    # 3) Muestro el resultado
-    print(f"El número {numero} es {resultado}.")
+        # Verifico si es múltiplo de 5
+        if numero % 5 == 0:
+            mensaje += " Además, el número es múltiplo de 5."
 
-    # 4) Ahora reviso si es múltiplo de 5 con el operador módulo
-    if numero % 5 == 0:
-        print("Además, el número es múltiplo de 5.")
+        return mensaje
 
-# 5) Llamo a la función
-clasificador_numeros()
+
+
+# Ejemplo de uso interactivo (no necesario para las pruebas)
+if __name__ == "__main__":
+   numero = int(input("Ingresa un número: "))
+validar_clasificador_de_numeros()

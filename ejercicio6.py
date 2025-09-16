@@ -1,25 +1,23 @@
-def encontrar_indices(frase, letra):
+def validar_indice_letras(frase: str, letra: str) -> list[int]:
     """
-    Función que busca todas las posiciones de una letra dentro de una frase.
-    Uso enumerate() para obtener tanto el índice como el carácter.
-    Devuelve una lista con los índices donde aparece la letra.
+    Busca todas las posiciones de una letra dentro de una frase.
+    Devuelve una lista con los índices donde aparece la letra,
+    ignorando mayúsculas/minúsculas.
     """
-
-    # 1) Inicializo una lista vacía para guardar las posiciones encontradas
     posiciones = []
-
-    # 2) Recorro la frase con enumerate(), que me da (índice, caracter)
-    for indice, caracter in enumerate(frase):
-        # 3) Comparo el caracter actual con la letra buscada
-        if caracter.lower() == letra.lower():
-            # Si son iguales (ignoro mayúsculas/minúsculas), guardo el índice
+    for indice, character in enumerate(frase):
+        if character.lower() == letra.lower():
             posiciones.append(indice)
-    # 4) Devuelvo la lista con todas las posiciones encontradas
     return posiciones
 
 
-# 5) Ejemplo de uso:
-frase = "Hola SENA"
-letra = "a"
-resultado = encontrar_indices(frase, letra)
-print(f"La letra '{letra}' aparece en las posiciones: {resultado}")
+def validar_indice():
+    """
+    Función interactiva que pide al usuario una frase y una letra.
+    Devuelve la lista de posiciones donde aparece la letra.
+    """
+    frase = input("Ingresa una frase: ")
+    letra = input("Ingresa una letra a buscar: ")
+    resultado = validar_indice_letras(frase, letra)
+    print(f"La letra '{letra}' aparece en las posiciones: {resultado}")
+    return resultado  # devolvemos para poder testearlo en las pruebas

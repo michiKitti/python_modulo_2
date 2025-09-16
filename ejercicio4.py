@@ -1,59 +1,73 @@
 import random
 
-def juego_piedra_papel_tijeras():
+def determinar_ganador(jugador, pc):
     """
-    Juego clásico de Piedra, Papel o Tijeras contra la computadora.
-    Reglas:
-    - Piedra gana a Tijeras
-    - Tijeras gana a Papel
-    - Papel gana a Piedra
-    El primero que llegue a 3 victorias gana la partida.
+    Determina el resultado de una ronda.
+    Retorna:
+    - "jugador" si gana el jugador
+    - "pc" si gana la computadora
+    - "empate" si ambos eligen lo mismo
     """
-
-    # 1) Inicializo los contadores de victorias
-    victorias_jugador = 0
-    victorias_pc = 0
-
-    # 2) Opciones disponibles
-    opciones = ["piedra", "papel", "tijeras"]
-
-    print("=== Juego: Piedra, Papel o Tijeras ===")
-    print("El primero en llegar a 3 victorias gana la partida.\n")
-
-    # 3) El juego se repite hasta que alguien llegue a 3 victorias
-    while victorias_jugador < 3 and victorias_pc < 3:
-        # 4) Pido al jugador su elección
-        jugador = input("Elige piedra, papel o tijeras: ").lower()
-
-        # 5) Valido que sea una opción válida
-        if jugador not in opciones:
-            print(" Opción no válida. Intenta de nuevo.\n")
-            continue  # vuelve al inicio del bucle
-
-        # 6) La computadora elige una opción al azar
-        pc = random.choice(opciones)
-        print(f"La computadora eligió: {pc}")
-
-        # 7) Comparo las elecciones y determino el ganador de la ronda
-        if jugador == pc:
-            print(" Empate, nadie gana esta ronda.\n")
-        elif (jugador == "piedra" and pc == "tijeras") or \
-             (jugador == "tijeras" and pc == "papel") or \
-             (jugador == "papel" and pc == "piedra"):
-            print("¡Ganaste esta ronda!\n")
-            victorias_jugador += 1
-        else:
-            print(" La computadora gana esta ronda.\n")
-            victorias_pc += 1
-
-        # 8) Muestro el marcador actual
-        print(f"Marcador: Tú {victorias_jugador} - {victorias_pc} Computadora\n")
-
-    # 9) Al salir del bucle, alguien llegó a 3 victorias
-    if victorias_jugador == 3:
-        print(" ¡Felicidades, ganaste la partida!")
+    if jugador == pc:
+        return "empate"
+    elif (jugador == "piedra" and pc == "tijeras") or \
+         (jugador == "tijeras" and pc == "papel") or \
+         (jugador == "papel" and pc == "piedra"):
+        return "jugador"
     else:
-        print(" La computadora ganó la partida. ¡Suerte para la próxima!")
+        return "pc"
 
-# 10) Llamo a la función para jugar
-juego_piedra_papel_tijeras()
+
+def jugar_ronda(jugador, pc):
+
+
+        """
+        Devuelve el mensaje de la ronda y el ganador.
+        """
+        if jugador not in ["piedra", "papel", "tijeras"]:
+            return "Opción no válida.", None
+
+        ganador = determinar_ganador(jugador, pc)
+
+        if ganador == "empate":
+            return "Empate, nadie gana esta ronda.", "empate"
+        elif ganador == "jugador":
+            return "¡Ganaste esta ronda!", "jugador"
+        else:
+            return "La computadora gana esta ronda.", "pc"
+
+
+def juego_piedra_papel_tijeras():
+
+        """
+        Juego principal contra la computadora (con input/print).
+        El primero que llega a 3 victorias gana.
+        """
+        victorias_jugador = 0
+        victorias_pc = 0
+        opciones = ["piedra", "papel", "tijeras"]
+
+        print("=== Juego: Piedra, Papel o Tijeras ===")
+        print("El primero en llegar a 3 victorias gana la partida.\n")
+
+        while victorias_jugador < 3 and victorias_pc < 3:
+            jugador = input("Elige piedra, papel o tijeras: ").lower()
+            pc = random.choice(opciones)
+            print(f"La computadora eligió: {pc}")
+
+            mensaje, ganador = jugar_ronda(jugador, pc)
+            print(mensaje + "\n")
+
+            if ganador == "jugador":
+                victorias_jugador += 1
+            elif ganador == "pc":
+                victorias_pc += 1
+
+        if victorias_jugador == 3:
+            print("¡Felicidades! Ganaste la partida.")
+        else:
+            print("La computadora ganó la partida.")
+
+
+if __name__ == "__main__":
+    juego_piedra_papel_tijeras()

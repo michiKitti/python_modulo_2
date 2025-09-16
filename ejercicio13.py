@@ -1,21 +1,33 @@
-def aventura_texto():
+def aventura_texto(comandos=None):
     """
-    Juego de aventura en texto:
+    Juego de aventura en texto.
     - El jugador empieza en la habitación inicial.
     - Puede tomar decisiones escribiendo comandos.
     - Hay 3 habitaciones y un final (ganar o perder).
+    Si se pasa una lista en 'comandos', se usan esos comandos en vez de input().
+    Devuelve "ganaste" o "perdiste".
     """
 
-    # 1) Defino la habitación inicial
     habitacion = "inicio"
-    juego_activo = True  # para controlar el bucle principal
+    juego_activo = True
+    resultado = None  # para devolver al final
 
     print("¡Bienvenido a la Aventura del Tesoro!")
     print("Estás en una habitación oscura. Solo ves una puerta al norte.")
 
-    # 2) Bucle principal del juego
+    # para pruebas unitarias: iterador de comandos
+    comandos_iter = iter(comandos) if comandos is not None else None
+
     while juego_activo:
-        accion = input("\n¿Qué quieres hacer? > ").lower()
+        # pedir acción
+        if comandos_iter:
+            try:
+                accion = next(comandos_iter).lower()
+                print(f"> {accion}")  # muestra el comando simulado
+            except StopIteration:
+                break
+        else:
+            accion = input("\n¿Qué quieres hacer? > ").lower()
 
         # --- HABITACIÓN INICIO ---
         if habitacion == "inicio":
@@ -39,17 +51,21 @@ def aventura_texto():
         # --- HABITACIÓN DEL MONSTRUO ---
         elif habitacion == "monstruo":
             if accion == "luchar":
-                print("¡Increíble! Venciste al monstruo y encuentras el tesoro. ")
+                print("¡Increíble! Venciste al monstruo y encuentras el tesoro.")
                 print("¡Has ganado la aventura!")
+                resultado = "ganaste"
                 juego_activo = False
             elif accion == "huir":
                 print("Intentas huir, pero el monstruo te atrapa.")
                 print("Fin del juego. Has perdido.")
+                resultado = "perdiste"
                 juego_activo = False
             else:
                 print("Debes elegir: 'luchar' o 'huir'.")
 
     print("\nGracias por jugar.")
+    return resultado  # útil para tests
 
-# Llamo a la función para ejecutar el juego
-aventura_texto()
+
+if __name__ == "__main__":
+    aventura_texto()  # modo interactivo

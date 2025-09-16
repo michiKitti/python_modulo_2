@@ -20,7 +20,7 @@ def mostrar_tablero(palabra_secreta, letras_adivinadas, vidas):
 
 def validar_entrada(letra, letras_adivinadas):
     """
-    Valida que la entrada:
+    Válida que la entrada:
     - Sea una sola letra
     - No se haya intentado antes
     """
@@ -40,7 +40,7 @@ def jugar_ahorcado():
     - Controla vidas, tablero y estado del juego
     """
     # Lista de palabras secretas
-    palabras = ["python", "computadora", "teclado", "programacion", "ahorcado"]
+    palabras = ["python", "computadora", "teclado", "programación", "ahorcado"]
     palabra_secreta = random.choice(palabras)
 
     vidas = 6  # número de intentos permitidos

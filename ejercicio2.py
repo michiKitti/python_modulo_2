@@ -1,19 +1,15 @@
 def interprete_comandos():
-
     """
     Intérprete de Comandos Sencillo
-    Desarrolla un programa que simule un menú de consola usando la estructura match-case. El programa mostrará una lista de comandos disponibles ("guardar", "cargar", "salir") y el usuario ingresará uno
-    El programa debe ejecutar una acción simulada para cada comando (ej. imprimir "Guardando archivo...").
-	Si el comando no es válido, debe mostrar un mensaje de error.
-	El programa debe seguir pidiendo comandos hasta que el usuario escriba "salir".
+    Simula un menú de consola con los comandos:
+    - "guardar" → imprime "Guardando archivo..."
+    - "cargar" → imprime "Cargando archivo..."
+    - "salir" → finaliza el programa
+    Si el comando no es válido, muestra un mensaje de error.
     """
-
-
-#DESARROLLO
-    return validarcomandos()
-
     while True:
         comando = input("Ingresa un comando: ").lower()
+
         match comando:
             case "guardar":
                 print("Guardando archivo...")
@@ -25,11 +21,20 @@ def interprete_comandos():
             case _:
                 print("Error: comando no reconocido. Intenta de nuevo.")
 
+def validar_comandos(self, mock_stdout, mock_input):
+        interprete_comandos()
+        salida = mock_stdout.getvalue()
+        self.assertIn("Guardando archivo...", salida)
+        self.assertIn("Saliendo del programa. ¡Adiós!", salida)
+        mock_input.assert_called()  # <-- así ya PyCharm reconoce que se usa
 
-def validarcomandos():
-    comandos_validos = ["guardar", "cargar", "salir"]
-    return comandos_validos in comandos_validos
+        interprete_comandos()
+        salida = mock_stdout.getvalue()
+        self.assertIn("Guardando archivo...", salida)
+        self.assertIn("Saliendo del programa. ¡Adiós!", salida)
+        mock_input.assert_called()  # <-- así ya PyCharm reconoce que se usa
 
 
+# Ejecutar el intérprete solo si el archivo es ejecutado directamente
 if __name__ == "__main__":
     interprete_comandos()
